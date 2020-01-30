@@ -1,0 +1,31 @@
+This README if for Compuational Physics Homework Assignment 1
+
+The scope of this README is to cover compliation and running of HW1
+
+Untar rooney.tar with the command: 
+
+tar xf rooney.tar rooney/
+
+Inside the folder will be a file called HW1.c assuming you are using the standard GNU/linux toolchain the following command should be given to compile the program:
+
+HW1.c -o HW1 -lm
+
+This will create an executable file HW1.
+
+HW1 requires 7 arguments to run.
+
+The Inital conditions required are A_x, A_y, phi_x and phi_y.
+
+Additionally you must provide the Omega_x and Omega_y. These are determined by the sqrt(k_x/mass_x) and sqrt(k_y/mass_y) of the system being modeled.
+
+Lastly you must provide N, the number of points you want to plot per phase.
+
+The program will plot t=0 to t = 50/Omega_min if Omega_x != Omega_y. 
+
+Otherwise if Omega_x is equal to Omega_y then the program will plot one full phase of the occilation.
+
+An example command would be:
+
+./HW1 1 2 0 0.7853975 1 1 100
+
+After executing the code a file named cor.txt will be generated, this text fill will contain a list of x and y coordinate pairs seperated by a space, with each pair on a new line.
