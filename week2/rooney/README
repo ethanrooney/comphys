@@ -1,0 +1,18 @@
+Integrate.c README
+
+To install integrate.c:
+Navagate to the folder rooney.tar is in and execute the following command:
+
+	tar xf rooney.tar rooney
+
+After the folder rooney is extracted cd into the folder.
+To compile integrate.c execute the following command:
+
+	gcc integrate.c -o integrate -lm
+
+This will make an executable file integrate.
+To use integrate type
+
+	./integrate.c <number>
+
+where <number> represents any number between 1 and 2147483647.
