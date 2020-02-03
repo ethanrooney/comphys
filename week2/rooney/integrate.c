@@ -46,4 +46,5 @@ int main(int argv, char** args)
 	{
 		printf("You must provide an integer number between 1 and 2147483647\n");
 	}
+	return 0;
 }
