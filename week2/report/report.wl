@@ -13,10 +13,10 @@ SetDirectory["~/spring20/comphys/week2/"];
  and midpoint integrators.  
  Discuss how the bin width and the choice of integrator affect the
 error
-*)\[AliasDelimiter]
-exact = N[Integrate[Exp[x],{x, 0, 1}], 15];
-Print[exact];
+*)
+
 getres[n_,i_] := ReadList["!./integrate " <> ToString[n] <> " | awk '{print $"<> ToString[i]<>"}'", Number][[1]];
+
 Print[N[getres[4,1],15]];
 Print[N[getres[4,2],15]];
 resleft = Table[{1/n, Abs[(getres[n,1] - exact)/exact]}, {n, {10, 100, 1000, 10000, 100000, 1000000, 10000000}}];
