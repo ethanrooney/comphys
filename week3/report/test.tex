@@ -32,18 +32,18 @@
 
 \section{Introduction}
  
-This weeks homework centers around the implimentation of the Rutta-Kunga 2 method for numaric integrators.
+This weeks homework centers around the implementation of the Rutta-Kunga 2 method for numeric integrators.
 
-I will be implimenting this algorithm on a variaty of systems, initially I will be modeling an idealized version of Earths orbit, assuming that the planet is in a perfectly cirular orbit and then experimenting with more and more eliptical orbits to see show how the RK2 method begins to break when the liniarity of a system varies drasticly over a fixed timestep. As seen in the highly eccentric orbit covered in problem 4. 
+I will be implementing this algorithm on a variety of systems, initially I will be modeling an idealized version of Earths orbit, assuming that the planet is in a perfectly circular orbit and then experimenting with more and more elliptical orbits to see show how the RK2 method begins to break when the linearity of a system varies drastically over a fixed time step. As seen in the highly eccentric orbit covered in problem 4. 
 
-The core of the RK2 method is to find a better way to approximate an integral when compared to Euler's method. For RK2 once the differential equation is known, the slope at the inital time $t_0$ and inital position $x_0$ is computed, a halfstep is taken along that line, the approximate value of the slope at the midpoint is then calculated, and then a full step is taken along the newly computed slope of the equation from $(t_0, x_0)$ to $(t_i, x_i)$. For well behaved differential equations, this method provides a more accurate method of integration than Euler's method.
+The core of the RK2 method is to find a better way to approximate an integral when compared to Euler's method. For RK2 once the differential equation is known, the slope at the initial time $t_0$ and initial position $x_0$ is computed, a half step is taken along that line, the approximate value of the slope at the midpoint is then calculated, and then a full step is taken along the newly computed slope of the equation from $(t_0, x_0)$ to $(t_i, x_i)$. For well behaved differential equations, this method provides a more accurate method of integration than Euler's method.
 
 \begin{equation}
-	k_1 = f(y^*(t_0),t_0)
+	k_1 = f(y'(t_0),t_0)
 \end{equation}
 
 \begin{equation}
-	y_1(t_0 + \frac{h}{2}) = y^*(t_0) + k_1\frac{h}{2}
+	y_1(t_0 + \frac{h}{2}) = y'(t_0) + k_1\frac{h}{2}
 \end{equation}
 
 \begin{equation}
@@ -51,7 +51,7 @@ The core of the RK2 method is to find a better way to approximate an integral wh
 \end{equation}
 
 \begin{equation}\label{eq:rk2}
-	y*(t_0+h) = y^*(t_0)+k_2h
+	y'(t_0+h) = y'(t_0)+k_2h 
 \end{equation}
 
 \section{Results}
@@ -66,7 +66,7 @@ $ r = 1 \text{AU} $
 and 
 $ \ddot{r} = a_c $
 we can then use Equation \ref{eq:2} to find 
-$ GM_{\cdot} = v^2r $.
+$ GM_{\odot} = v^2r $.
 We know that 
 $ v $
 is the tangential velocity of the earth, which must travel
@@ -74,7 +74,8 @@ $ 1 \text{AU} \times 2\pi \text{ rad} $
 per 
 $ 1 \text{ Year} $
 we find 
-$ GM_{\cdot} = 4\pi^2 \text{AU}^3\text{Year}^-2 $.
+$ GM_{\cdot} = 4\pi^2 \text{AU}^3\text{Year}^{-2} $.
+
 
 \begin{equation}\label{eq:1}
 	\ddot{r} = \frac{GM_{\odot}}{r^2}\hat{r}
@@ -216,6 +217,6 @@ If you look at Figure \ref{fig:r3e} we can see that the total energy of the syst
 
 \section{Conclusions}
 
-Rutta-Kunga method provides a much quicker method of approximating solutions to differential equations than Eulers Method. Also there is a rather nice package for vim called `xuhdev/vim-latex-live-preview' it really simplifies the process of writing \LaTeX. Additionally I managed to find the problem with Mathematica crashing on file saves. If more than one Kernal is open then they can conflict in file brower \texttt{SetDirectory}. When that happens Mathmatica freezes and all progress can be lost.
+Rutta-Kunga method provides a much quicker method of approximating solutions to differential equations than Euler's Method. Also there is a rather nice package for vim called `xuhdev/vim-latex-live-preview' it really simplifies the process of writing \LaTeX. Additionally I managed to find the problem with Mathematica crashing on file saves. If more than one Kernel is open then they can conflict in file browser \texttt{SetDirectory}. When that happens Mathematica freezes and all progress can be lost.
 
 \end{document}
