@@ -1,3 +1,14 @@
-integral2.c is working for the assignment
+To compile integral2.c 
 
-will need to be modified to take user input
+gcc integral2.c -o integral -lm
+
+to run give 5 arguments: x_0, v0_y, v0_x, dt, t_max
+Example below:
+
+./integral2 1, 6.283185, 0, .01, 1
+
+The above command places an object at 1 AU from the sun at coordiantes (1,0), sets it in motion at 2*pi in the positive y direction, then uses a time step of 1/100 of a year, and returns values for 1 year.
+
+Interpreting the output:
+
+The output is 7 values corisponding to: time, v_x, v_y, x, y, orbital energy, radius, potential energy, kinetic energy
