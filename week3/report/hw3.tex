@@ -187,7 +187,7 @@ In Figure \ref{fig:vee} see a plot of the energy transformation for a highly ell
 	\label{fig:veo}
 \end{figure}
 
-For Highly eccentric orbits, a loss of precision of the simulation occurs every time the planet passes through the perigee. For highly elliptical orbits this happens because during the passing of perigee there is a rapid change in both the direction and velocity of the orbiting body, the RK2 algorithm is insufficient to keep up with these rapid changes and would need to use a shorter timescale to preserve accuracy. However, long orbits means that a lot of extra computation is required for this solution, where much of the time the larger time step would be sufficient.
+For Highly eccentric orbits, a loss of precision of the simulation occurs every time the planet passes through the perigee. For highly elliptical orbits this happens because during the passing of perigee there is a rapid change in both the direction and velocity of the orbiting body, the RK2 algorithm is insufficient to keep up with these rapid changes and would need to use a shorter timescale to preserve accuracy. However, long orbits means that a lot of extra computation is required for this solution. Where much of the time the larger time step would be sufficient.
 
 \pagebreak
 \bigskip

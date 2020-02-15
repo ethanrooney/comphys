@@ -45,10 +45,10 @@ int main(int argv, char** args)
 {
 	if(argv < 4)
 	{
-		if(strncmp(args[1], "-m", 2)){
+		if(strncmp(args[1], "-l", 2)){
 			integratemiddle(0, 1, atoi(args[2]));
 		}
-		if(strncmp(args[1], "-l", 2)){
+		if(strncmp(args[1], "-m", 2)){
 			integrateleft(0,1, atoi(args[2]));
 		}
 		printf("%c", strncmp(args[1], "-m",2));
