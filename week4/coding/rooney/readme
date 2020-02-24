@@ -1,0 +1,24 @@
+This code assignment is comprised of multiple components the main function is located in a file called nbody.c. However the source code calls a generalized rk2 integration function written in the file called rk2.c. Because we are calling another function this way, a header file is required, this header file lets the compiler know what to expect from the rk2 integrator.
+
+To compile the code use the following commands while in the rooney directory.
+
+gcc -c rk2.c
+
+gcc -o nbody nbody.c -lm rk2.o 
+
+
+
+The first command compiles the rk2.c file to an object file. The second command compiles nbody.c to a program nbody, and links the program to the math library and the rk2.o object made by the first file.
+
+The program take inputs for 3 bodies in the following order:
+
+dt Tmax m0 x0 y0 vx0 vy0 m1 x1 y1 vx1 vy1 m2 x2 y2 vx2 vy2
+
+
+Bellow is a test command for an earth like object 
+
+./nbody 0.01 1 1 0 0 0 0 0.0000001 1 0 0 6.283185 0.00000 0 0 0 0
+
+The program the returns the following info:
+
+time x0 y0 x1 y1 x2 y2 vx0 vy0 vx1 vy1 vx2 vy2 
