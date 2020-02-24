@@ -27,9 +27,12 @@ void F( double* y, double t, double* res, double* mass )
 		for(int j=0; j<NBODY; ++j) if(j!=i)
 		{
 			double r[2] = { y[2*j] - y[2*i], y[2*j+1]-y[2*i+1] };
+			if( r[0] != 0 || r[1] != 0 )
+			{
 			double magr = sqrt(r[0]*r[0]+r[1]*r[1]);
 			res[2*NBODY+2*i]	+= G*mass[j]*r[0]/pow(magr,3);	//vxi
 			res[2*NBODY+2*i+1]	+= G*mass[j]*r[1]/pow(magr,3);	//vyi
+			}
 		}
 	}
 }
