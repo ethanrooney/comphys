@@ -1,4 +1,3 @@
-
 \documentclass{article}
 
 \usepackage{graphicx}
@@ -9,9 +8,9 @@
 \usepackage{float}
 
 
-\def\hwtitle{Computational Physics HW3}
+\def\hwtitle{Computational Physics HW4}
 \def\hwauthor{Ethan Rooney}
-\def\hwdate{2020-02-12}
+\def\hwdate{2020-02-26}
 
 \usepackage{fancyhdr}
 \lhead{\hwauthor}
@@ -44,9 +43,9 @@ Here we check the validity of our generalized RK2 integrator with a 2 body probl
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p0.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p0.pdf}
 	\end{center}
-	\caption{}
+	\caption{Qualitative Check of the Integrator. An Earth-like object completes an orbit in 1 year.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -55,26 +54,26 @@ Here we check the validity of our generalized RK2 integrator with a 2 body probl
 
 We continue the extension of last weeks work with a trial run of a 3-body system much like the one we find in our own solar system.
 
-\subsubsection{1}
+\subsubsection{Part 1}
 
 The Moon's orbit is close enough to Earth's that the orbit of Earth is obscured.
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-1a.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-1a.pdf}
 	\end{center}
-	\caption{}
+	\caption{3 Body system of Sun, Earth, and Moon.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
+Over 8 Years the Moon slowly drifts towards, and away from the earth with a slight net movement away.
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-1b.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-1b.pdf}
 	\end{center}
-	\caption{}
+	\caption{8 Years of the Moon's Orbit. The thick ring of blue is overlapping Sinusoidal orbits.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -83,9 +82,9 @@ We can see the ebb and flow of the moons orbit clearly in the Graphic below. The
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-1c.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-1c.pdf}
 	\end{center}
-	\caption{}
+	\caption{The Moon's orbit is perturbed by the Sun's gravity.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -93,74 +92,43 @@ We can see the ebb and flow of the moons orbit clearly in the Graphic below. The
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-1d.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-1d.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-1e.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-1f.pdf}
 	\end{center}
-	\caption{}
+	\caption{Through the oscillations of the Moon's Orbit Kinetic energy is exchanged for Potential Energy, but Total Energy is conserved in this simulation.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-1e.pdf}
-	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-1f.pdf}
-	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-1f.pdf}
-	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-\subsubsection{2}
+\subsubsection{Part 2}
 
 What Happens if we change the parameters of the Earth Sun and Moon?
 Below are similar plots, but instead of the actual values of the Sun, Earth and Moon, I plotted $M_1 = 1, M_2 = 10^{-2}, M_3 = 10^{-4}, r_{23} = 0,06$ AU. 
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-2a.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-2a.pdf}
 	\end{center}
-	\caption{}
+	\caption{With a more massive planet orbiting the Sun we see a noticeable drift of the system. Furthermore the initial conditions are such that the sun plays a larger roll in shaping the orbit of the Moon.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
-
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-2b.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-2b.pdf}
 	\end{center}
-	\caption{}
+	\caption{The Perturbations Caused by the Sun are much more Pronounced.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
-
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-2c.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-2c.pdf}
 	\end{center}
-	\caption{}
+	\caption{Interesting Harmonics Form in the Moon's orbit.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -168,74 +136,42 @@ We can see the ebb and flow of the moons orbit clearly in the Graphic below. The
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-2d.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-2d.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-2e.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-2f.pdf}
 	\end{center}
-	\caption{}
+	\caption{Total Energy of the system is conserved.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-2e.pdf}
-	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-2f.pdf}
-	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-\subsubsection{3}
+\subsubsection{Part 3}
 
 Plotted for $M_1 = 1, M_2 = 10^{-2}, M_3 = 10^{-4}, r_{23} = 0,08$ AU. 
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-3a.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-3a.pdf}
 	\end{center}
-	\caption{}
+	\caption{The Moon is Pulled Free from the Earths Orbit, and Establishes a Planetary orbit.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
-
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-3b.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-3b.pdf}
 	\end{center}
-	\caption{}
+	\caption{The Moon Leaving Orbit from the Planet}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
-
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-3c.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-3c.pdf}
 	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-3d.pdf}
-	\end{center}
-	\caption{}
+	\caption{Moon Ejected from Orbiting the Planetary Body, but remains in the system.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -243,64 +179,44 @@ We can see the ebb and flow of the moons orbit clearly in the Graphic below. The
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-3e.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-3d.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-3e.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-3f.pdf}
 	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-3f.pdf}
-	\end{center}
-	\caption{}
+	\caption{Exchange of Energy Types, Total Energy Conserved}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier  
 
-\subsubsection{4}
+\subsubsection{Part 4}
 
 Plotted for $M_1 = 1, M_2 = 10^{-1}, M_3 = 10^{-4}, r_{23} = 0.2$ AU. 
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-4a.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-4a.pdf}
 	\end{center}
-	\caption{}
+	\caption{Moon like object ejected from system.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
+Considerable drift is now occurring in the system, and the "Moon" is rapidly ejected from orbit.
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-4b.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-4b.pdf}
 	\end{center}
-	\caption{}
+	\caption{The "Moon" Completes a few orbits before being Ejected from the system.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
-
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-4c.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-4c.pdf}
 	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-4d.pdf}
-	\end{center}
-	\caption{}
+	\caption{Bye Moon!}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -308,18 +224,11 @@ We can see the ebb and flow of the moons orbit clearly in the Graphic below. The
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-4e.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-4d.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-4e.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p1-4f.pdf}
 	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p1-4f.pdf}
-	\end{center}
-	\caption{}
+	\caption{Energy of the system Dominated by they Sun/Earth interactions.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -332,9 +241,9 @@ Below we see the motion of the 3 bodies relative to the center of mass for the s
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p2-1a.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p2-1a.pdf}
 	\end{center}
-	\caption{}
+	\caption{4 Body system Evolution over 10 years. Corrected for Center of Mass Motion}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -343,9 +252,9 @@ With out correcting for the drift of the system, the net momentum of the system 
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p2-1b.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p2-1b.pdf}
 	\end{center}
-	\caption{}
+	\caption{Overall motion of system. Notice down and left trend.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -354,37 +263,19 @@ We can see the ebb and flow of the moons orbit clearly in the Graphic below. The
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p2-1c.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p2-1c.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p2-1d.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p2-1e.pdf}
 	\end{center}
-	\caption{}
+	\caption{Energy Exchange Of 3 equal mass bodies in a system. Total Energy is conserved until $\sim$9 year. This discontinuity occurs when 2 of the bodies had a near collision and where ejected. The System is no longer gravitationally bound.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p2-1d.pdf}
-	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p2-1e.pdf}
-	\end{center}
-	\caption{}
-\label{fig:qual}
-\end{figure}
-\FloatBarrier
-
-In the images of energy above, when the bodies get very close, the rate of change of the position and velocity are high enough that the linear approximation over dt is no longer valid. The actual effects of these small separation vectors would most likely caused a collision of the bodies, or of a breakup of one or both of the bodies into smaller chunks. One possible solution is to add collision detection, and allow for a perfectly inelastic collision of the 2 bodies to for 1 large gravitationally bound body, or to implement a "monitoring system" that could dial up or down the time step for systems when 2 bodies get very close.
+In the images of energy above, when the bodies get very close, the rate of change of the position and velocity are high enough that the linear approximation over dt is no longer valid. The actual effects of these small separation vectors would most likely caused a collision of the bodies, or of a breakup of one or both of the bodies into smaller chunks. One possible solution is to add collision detection, and allow for a perfectly inelastic collision of the 2 bodies to form 1 large gravitationally bound body, or to implement a "monitoring system" that could dial up or down the time step for systems when 2 bodies get very close.
 
 \subsection{Question 3}
-For the $n$-body problem the compute resources required scales as $\mathcal{O}(n^2)$. This is because for each body every other body has to be computed against it. To reduce steps you could compute the effects of $i$ on $j$ at the same time you compute the effects of $j$ on $i$ then you wouldn't need to loop over the full list every time, just loop through  $i>j$. But this doesn't change the  $\mathcal{O}(n^2)$, it would just save some time in the looping. Alternatively, you could threshold each body, and then only compute the effects of nearby objects. To do this you would need to establish a hierarchy of bodies, for example you would compute the effects of the Sun on the Moon, but you could neglect the effects of the Moon on the Sun, while still computing the effect of the Moon on Earth. You could also compute the effects of the CoM on each object. So you would find the CoM for bodies that are relatively close to each other then us the CoM to compute the effects on bodies that are far enough away to treat a cluster of objects as one body.
+For the $n$-body problem the compute resources required scales as $\mathcal{O}(n^2)$. This is because for each body every other body has to be computed against it. To reduce steps you could compute the effects of $i$ on $j$ at the same time you compute the effects of $j$ on $i$ then you wouldn't need to loop over the full list every time, just loop through  $i>j$. But this doesn't change the  $\mathcal{O}(n^2)$, it would just save some time in the looping. Alternatively, you could threshold each body, and then only compute the effects of nearby objects. To do this you would need to establish a hierarchy of bodies, for example you would compute the effects of the Sun on the Moon, but you could neglect the effects of the Moon on the Sun, while still computing the effect of the Moon on Earth. You could also compute the effects of the CoM on each object. So you would find the CoM for bodies that are relatively close to each other then use the CoM to compute the effects on bodies that are far enough away to treat a cluster of objects as one body.
 
 \subsection{Bonus Question 4}
 
@@ -392,9 +283,9 @@ See the Picture below.
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{p4-1a.pdf}
+		\includegraphics[width=0.6\textwidth]{images/p4-1a.pdf}
 	\end{center}
-	\caption{}
+	\caption{4 Body system with 2 Sun sized objects and an Earth and Moon like Object. Near the end of the Simulation we see the Moon Ejected from the system.}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
@@ -408,6 +299,6 @@ The Dominant Forces are the 2 main stars, while the Planets gravity is subdomina
 
 \section{Conclusions}
 
-This Project was rather neat. One tweak I made to the code was to ignore interactions between objects if the length of the separation vector was zero. This prevented a significant number of \tttext{-nan} errors, this was especially useful when working with 2 body systems to suppress errors caused by nonexistent bodies that had mass of zero. 
+This Project was rather neat. One tweak I made to the code was to ignore interactions between objects if the length of the separation vector was zero. This prevented a significant number of \texttt{-nan} errors, this was especially useful when working with 2 body systems to suppress errors caused by nonexistent bodies that had mass of zero. 
 
 \end{document}
