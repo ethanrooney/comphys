@@ -34,202 +34,380 @@
 
 \section{Introduction}
  
-This weeks homework centers around the implementation of the Rutta-Kunga 2 method for numeric integrators.
-
-I will be implementing this algorithm on a variety of systems, initially I will be modeling an idealized version of Earths orbit, assuming that the planet is in a perfectly circular orbit and then experimenting with more and more elliptical orbits to see show how the RK2 method begins to break when the linearity of a system varies drastically over a fixed time step. As seen in the highly eccentric orbit covered in problem 4. 
-
-The core of the RK2 method is to find a better way to approximate an integral when compared to Euler's method. For RK2 once the differential equation is known, the slope at the initial time $t_0$ and initial position $x_0$ is computed, a half step is taken along that line, the approximate value of the slope at the midpoint is then calculated, and then a full step is taken along the newly computed slope of the equation from $(t_0, x_0)$ to $(t_i, x_i)$. For well behaved differential equations, this method provides a more accurate method of integration than Euler's method.
-
-\begin{equation}
-	k_1 = f(y'(t_0),t_0)
-\end{equation}
-
-\begin{equation}
-	y_1(t_0 + \frac{h}{2}) = y'(t_0) + k_1\frac{h}{2}
-\end{equation}
-
-\begin{equation}
-	k_2 = f(y_1(t_0+\frac{h}{2}), t_0 +\frac{h}{2})
-\end{equation}
-
-\begin{equation}\label{eq:rk2}
-	y'(t_0+h) = y'(t_0)+k_2h 
-\end{equation}
+This weeks homework is the continuation of Week 3. We are extending and generalizing from 2 body interactions to $n$-body systems. The math is essentially unchanged from last weeks assignment. We are utilizing the RK2 integrator, with more bodies.
 
 \section{Results}
 
-\subsection{Question 1}
+\subsection{Question 0}
 
-
-Given Equation \ref{eq:1}: if we let 
-$ r = 1 \text{AU} $ 
-and 
-$ \ddot{r} = a_c $
-we can then use Equation \ref{eq:2} to find 
-$ GM_{\odot} = v^2r $.
-We know that 
-$ v $
-is the tangential velocity of the earth, which must travel
-$ 1 \text{AU} \times 2\pi \text{ rad} $
-per 
-$ 1 \text{ Year} $
-we find 
-$ GM_{\cdot} = 4\pi^2 \text{AU}^3\text{Year}^{-2} $.
-
-
-\begin{equation}\label{eq:1}
-	\ddot{r} = \frac{GM_{\odot}}{r^2}\hat{r}
-\end{equation}
-\begin{equation}\label{eq:2}
-	a_c = \frac{v^2}{r}
-\end{equation}
-
-
-
-\pagebreak
-\subsection{Question 2}
-
-As seen in Figure \ref{fig:qual} we see the orbit of Earth as we would expect for the initial conditions given.
+Here we check the validity of our generalized RK2 integrator with a 2 body problem. A "earth-like" object is put into motion 1 AU away from a "sun-like" object with the same velocity as the earth. We see a circular orbit. This is a good start.
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{qual.pdf}
+		\includegraphics[width=0.5\textwidth]{p0.pdf}
 	\end{center}
-	\caption{Plot of the orbit of Earth as simulated with RK2}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+\subsection{Question 1}
+
+We continue the extension of last weeks work with a trial run of a 3-body system much like the one we find in our own solar system.
+
+\subsubsection{1}
+
+The Moon's orbit is close enough to Earth's that the orbit of Earth is obscured.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-1a.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-1b.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-1c.pdf}
+	\end{center}
+	\caption{}
 \label{fig:qual}
 \end{figure}
 \FloatBarrier
 
 
-While in Figure \ref{fig:qual} we see how error in the conservation of energy scales with step size. The slope of the Log-Log plot is 3 (See Equation \ref{eq:3}).
-This means that for a 10 fold increase in step size, the error of the integrator is reduced by 1000. This is consistent with the expected scaling of RK2.
-
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{error.pdf}
+		\includegraphics[width=0.5\textwidth]{p1-1d.pdf}
 	\end{center}
-	\caption{Error in the Energy Simulated by RK2 compared to Energy Conservation}
-\label{fig:error}
+	\caption{}
+\label{fig:qual}
 \end{figure}
 \FloatBarrier
 
 
-\begin{equation}\label{eq:3}
-	Slope = \frac{log(y_1)-log(y_2)}{log(x_1)-log(x_2)}=\frac{log(0.01)-log(0.001)}{log(8.73084*10^{-5})-log(9.65174*10^{-8})} \simeq 3
-\end{equation}
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-1e.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
 
-Based on the Above graph, the time step required for an accuracy of 1:1000 is $dt \simeq 0.0245$.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-1f.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-1f.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{2}
+
+What Happens if we change the parameters of the Earth Sun and Moon?
+Below are similar plots, but instead of the actual values of the Sun, Earth and Moon, I plotted $M_1 = 1, M_2 = 10^{-2}, M_3 = 10^{-4}, r_{23} = 0,06$ AU. 
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-2a.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-2b.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-2c.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
 
 
-\pagebreak
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-2d.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-2e.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-2f.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{3}
+
+Plotted for $M_1 = 1, M_2 = 10^{-2}, M_3 = 10^{-4}, r_{23} = 0,08$ AU. 
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-3a.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-3b.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-3c.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-3d.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-3e.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-3f.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier  
+
+\subsubsection{4}
+
+Plotted for $M_1 = 1, M_2 = 10^{-1}, M_3 = 10^{-4}, r_{23} = 0.2$ AU. 
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-4a.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+Over 8 Years the Moon slowly drifts towards, and away from the earth with a net movement away.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-4b.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-4c.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-4d.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-4e.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p1-4f.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+\subsection{Question 2}
+
+Plotted for $M_1 = M_2 = M_3 = 1, x_1=(0,0), v_1 = (1,-1), x,2 = (1,0), v_2 = (0,6), x_3=(2,0), v_3=(0,6)$ 
+
+Below we see the motion of the 3 bodies relative to the center of mass for the system. It appears very chaotic.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p2-1a.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+With out correcting for the drift of the system, the net momentum of the system causes a drift in the positive x and negative y directions.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p2-1b.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+We can see the ebb and flow of the moons orbit clearly in the Graphic below. There is a gentle trend overall for the moon to drift away from the earth.
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p2-1c.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p2-1d.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[!htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{p2-1e.pdf}
+	\end{center}
+	\caption{}
+\label{fig:qual}
+\end{figure}
+\FloatBarrier
+
+In the images of energy above, when the bodies get very close, the rate of change of the position and velocity are high enough that the linear approximation over dt is no longer valid. The actual effects of these small separation vectors would most likely caused a collision of the bodies, or of a breakup of one or both of the bodies into smaller chunks. One possible solution is to add collision detection, and allow for a perfectly inelastic collision of the 2 bodies to for 1 large gravitationally bound body, or to implement a "monitoring system" that could dial up or down the time step for systems when 2 bodies get very close.
+
 \subsection{Question 3}
+For the $n$-body problem the compute resources required scales as $\mathcal{O}(n^2)$. This is because for each body every other body has to be computed against it. To reduce steps you could compute the effects of $i$ on $j$ at the same time you compute the effects of $j$ on $i$ then you wouldn't need to loop over the full list every time, just loop through  $i>j$. But this doesn't change the  $\mathcal{O}(n^2)$, it would just save some time in the looping. Alternatively, you could threshold each body, and then only compute the effects of nearby objects. To do this you would need to establish a hierarchy of bodies, for example you would compute the effects of the Sun on the Moon, but you could neglect the effects of the Moon on the Sun, while still computing the effect of the Moon on Earth. You could also compute the effects of the CoM on each object. So you would find the CoM for bodies that are relatively close to each other then us the CoM to compute the effects on bodies that are far enough away to treat a cluster of objects as one body.
 
-Seen in Figure \ref{fig:eccen} is an orbiting body with a Ratio of aphelion:perihelion of 1.857.
+\subsection{Bonus Question 4}
 
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{eccen.pdf}
-	\end{center}
-	\caption{Eccentric Orbit of a Planet with Perihelion of 1.3 AU, with an initial velocity of $2\pi$ AU/Year.}
-	\label{fig:eccen}
-\end{figure}
-\FloatBarrier
-
-
-In Figure \ref{fig:energy} We see the energy of the planet as it makes one complete Revolution. The Kinetic energy of the Planet is at a max when the Potential Energy is at a minimum, which occurs at Perihelion. Furthermore the Total energy of the system is constant and negative, indicative of a bound system. This is consistent with my expectations.
+See the Picture below.
 
 \begin{figure}[!htb]
 	\begin{center}
-		\includegraphics[width=0.85\textwidth]{energy.pdf}
+		\includegraphics[width=0.5\textwidth]{p4-1a.pdf}
 	\end{center}
-	\caption{The Energy of a slightly eccentric orbiting body. The orange line is the Kinetic Energy, the blue is Potential Energy, while Green is the total energy.}
-\label{fig:energy}
+	\caption{}
+\label{fig:qual}
 \end{figure}
 \FloatBarrier
 
-\pagebreak
-\subsection{Question 4}
+Here we have created a binary star system with 2 one Sol mass objects. 
 
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{veo3.pdf}
-	\end{center}
-	\caption{Orbit of an eccentric body over 20000 years with a time step of 0.001. Orbit is $\sim7970$ years long.}
-	\label{fig:veo3}
-\end{figure}
-\FloatBarrier
+Around one of the Stars, a Earth/Moon system is put into orbit. The orbits of the Planet/Moon system is complicated immensely by the existence of the second star. Because of this the orbits they follow are highly irregular and eventually the Moon is ejected from the system when it ventures too close to its host planet.
 
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{veccenergy.pdf}
-	\end{center}
-	\caption{The Energy of a very eccentric orbiting body. Orange represents the Kinetic Energy, Blue the Potential Energy and Green the Total Energy}
-	\label{fig:vee}
-\end{figure}
-\FloatBarrier
-
-
-In Figure \ref{fig:vee} see a plot of the energy transformation for a highly elliptical orbit with a period of $ ~7970 $ years the orbit behaves much the way I expect it to. The small artifacts in Figure \ref{fig:veo3} near the perigee are due to the 5 year time steps used for plotting.
-
-
-\subsection{Question 5}
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{veo.pdf}
-	\end{center}
-	\caption{Something isn't right with our simulation. The planet shouldn't be leaving, yet is seems to get slingshot out of the system.}
-	\label{fig:veo}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{ver.pdf}
-	\end{center}
-	\caption{In the graph above we see radius of the orbit and the absolute value of the total energy. Every time the radius gets smaller energy seems to leak into the simulation.}
-	\label{fig:ver}
-\end{figure}
-\FloatBarrier
-
-
-For Highly eccentric orbits, a loss of precision of the simulation occurs every time the planet passes through the perigee. For highly elliptical orbits this happens because during the passing of perigee there is a rapid change in both the direction and velocity of the orbiting body, the RK2 algorithm is insufficient to keep up with these rapid changes and would need to use a shorter timescale to preserve accuracy. However, long orbits means that a lot of extra computation is required for this solution. Where much of the time the larger time step would be sufficient.
-
-
-\bigskip
-\noindent{\bf Bonus}
-\medskip
-
-No, these orbits are no longer elliptical. Once we move to a universe where gravity scales with $\frac{1}{r^3}$ energy is not conserved in orbital mechanics and any small deviation from a perfectly circular orbit will lead to the planet being ejected from orbit, as we can see in Figure \ref{fig:r3}. The initial condition for this system was a radius 1 part in 10000 larger than perfectly circular. Over a 20 year period the planet is flung further and further into space.
-
-If you look at Figure \ref{fig:r3e} we can see that the total energy of the system is not conserved.
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{r3.pdf}
-	\end{center}
-	\caption{The tiniest nudge can fling a planet out of orbit in this system.}
-	\label{fig:r3}
-\end{figure}
-\FloatBarrier
-
-
-
-\begin{figure}[!htb]
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{r3e.pdf}
-	\end{center}
-	\caption{Energy is no longer conserved in this system. Energy bleeds into the system and the planet is flung out into space. Green is the Total Energy of the system, Orange is the Kinetic Energy, and Blue is the Potential Energy.}
-	\label{fig:r3e}
-\end{figure}
-\FloatBarrier
+The Dominant Forces are the 2 main stars, while the Planets gravity is subdominant on the moon.
 
 
 \section{Conclusions}
 
-Rutta-Kunga method provides a much quicker method of approximating solutions to differential equations than Euler's Method. Also there is a rather nice package for vim called `xuhdev/vim-latex-live-preview' it really simplifies the process of writing \LaTeX. Additionally I managed to find the problem with Mathematica crashing on file saves. If more than one Kernel is open then they can conflict in file browser \texttt{SetDirectory}. When that happens Mathematica freezes and all progress can be lost.
+This Project was rather neat. One tweak I made to the code was to ignore interactions between objects if the length of the separation vector was zero. This prevented a significant number of \tttext{-nan} errors, this was especially useful when working with 2 body systems to suppress errors caused by nonexistent bodies that had mass of zero. 
 
 \end{document}
