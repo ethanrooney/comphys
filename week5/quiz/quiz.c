@@ -32,6 +32,10 @@ double lognfact(int n)
 
 int main(int argc, char** argv)
 {
-	printf("%lf\n",lognfact(atoi(argv[1])));
+	for(int i = 1; i<=100; i++)
+	{
+		printf("%i\t%lf\n",i,lognfact(i));
+	}
+	return 0;
 }
 
