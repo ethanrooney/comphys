@@ -1,0 +1,9 @@
+To compile the hw5.c program give the following command
+
+gcc hw5.c -o hw5
+
+to run hw5 give the following command
+
+./hw5 10 0 0 1 1 
+
+This tells hw5 that you want a 10 by ten grid of resistors with resistance 1, and you want the resistance between the origin and the point 1,1.
