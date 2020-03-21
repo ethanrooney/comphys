@@ -1,0 +1,119 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{placeins}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{float}
+
+
+\def\hwtitle{Computational Physics HW6}
+\def\hwauthor{Ethan Rooney}
+\def\hwdate{2020-03-25}
+
+\usepackage{fancyhdr}
+\lhead{\hwauthor}
+\chead{\hwtitle}
+\rhead{\hwdate}
+\lfoot{\hwauthor}
+\cfoot{}
+\rfoot{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+
+\author{\hwauthor}
+\title{\hwtitle}
+\date{\hwdate}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Introduction}
+ 
+Using Linear Algebra to develop Polynomials of best fit for given experimental data points.
+
+This week we use some standard statistical tools to fit models to data and to quantize how well our model fits the data.
+
+\section{Results}
+
+\subsection{Question 1}
+
+With the first 6 seconds, or first 13 data points, of \texttt{cannonball.dat} input into \texttt{hw6} we get \texttt{16380.416133	4.573787	-5.526405	6.906034} when put into the form:
+
+\[
+	y = y_0 + v_0 t + \frac{g}{2}t^2
+.\] 
+
+We find:
+\[ 
+g=-11.05281 \frac{\text{m}}{\text{s}^2}
+.\]
+
+With an \[
+\chi^2 = 6.906034
+.\] 
+
+
+This gives us a confidence interval of 0.734285
+
+This is a reasonable fit to the data.
+
+\subsection{Question 2}
+
+For the entire data set of \texttt{cannonball.dat} we find \texttt{16395.644750	-3.424541	-4.692395	140.237263}. 
+
+We find:
+\[ 
+g=-9.38479 \frac{\text{m}}{\text{s}^2}
+.\]
+
+With an \[
+\chi^2 = 140.237263
+.\] 
+
+
+This gives us a confidence interval of 0.0548956
+
+140.23 is at extreme end of a $\chi^2$ distribution, with only 5\% of fits more extreme, but leaves us inside of the magic number of 95\% confidence interval to be able to accept the underlying model.
+
+\subsection{Question 3 Bonus}
+For the Bonus problem we are trying to fit the following model:
+\[
+	A = A_00.5^\frac{t}{\tau}
+.\] 
+
+To do this we can linearise the model by taking the $\ln()$ of both sides.
+
+\[
+	\ln(A) = \ln(A_0) + t\frac{1}{\tau}\ln(0.5)
+.\] 
+
+As for the sigma, when working with radiation, we get a Poisson distribution, and the sigma of a Poisson distribution in a high count regime is $ \sqrt{N} $ and after the linearisation of the model by taking the log,$ \sigma = \frac{\sqrt{N}}{N}  $
+
+After adjusting the program to handle the two above accommodations we get the following output \texttt{11.802353	-0.086268	12.190726}.
+
+Where 
+\[11.802353 = \ln(A_0).\]
+
+\[-0.086268=\frac{1}{\tau}\ln(0.5)\]
+
+\[12.190726 = \chi^2\]
+
+Solving for the parameters we were trying to find we get $A_0 = 133519$. Which is very close to the known value of $133611$ and $\tau= 8.034 \text{days}$
+
+The radioisotope responsible for the observed activity is most likely Iodine-131. A common daughter isotope of U-235 fission with a half-life of 8.02 days\footnote{http://hpschapters.org/northcarolina/NSDS/131IPDF.pdf}.
+
+The biggest approximation that I made was the assumption that the $\sigma$ of a Poisson is $\approx \sqrt{N}$ in a high counts regime. For the later data points it is debatable if 200 counts is "high count" or not. 
+
+This approximation is unlikely to affect my model significantly.
+
+\section{Conclusion}
+
+Well, we did it. The bonus problem was a fun brain teaser to think through.
+
+\end{document}
+
