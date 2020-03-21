@@ -67,8 +67,9 @@ void chi_fit(int M, dpoint *data, int N)
 
     computeab(data, N, a, M, b);
     solve_linsys(a, M+1, b, alpha);
+	for(int i = 0; i<=M; i++) printf("%lf\t", alpha[i]);
 
-    printf("%lf ", chisq(alpha, M, data, N));
+    printf("%lf\t", chisq(alpha, M, data, N));
     printf("\n");
 
 	free(a);
