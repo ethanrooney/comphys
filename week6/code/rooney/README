@@ -1,0 +1,13 @@
+To compile my program you must first compile linalg.c to an object:
+
+gcc -c linalg.c
+
+Then you can compile hw6.c and link it with the following commands:
+
+gcc hw6.c -o hw6 -lm linalg.o
+
+After hw6 is compiled it can be used by providing the path to the file and the degree of the polynomial to be fit.
+
+For example if you had a data file called cannonball.dat in the same directory as hw6 you could fit it to a 2nd degree polynomial with the following command:
+
+./hw6 cannonball.dat 2
