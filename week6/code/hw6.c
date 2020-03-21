@@ -23,23 +23,6 @@ void computeab(dpoint* data, int N, double* a, int M, double* b)
   }
 }
 
-double gausrnd()
-{
-  double u1 = drand48();
-  double u2 = drand48();
-  return sqrt(-2*log(u1))*cos(2*M_PI*u2);
-}
-
-void  generate_data(dpoint* data, int N)
-{
-  for(int x=1; x<N+1; ++x)
-  {
-    data[x-1].x = x;
-    data[x-1].sigma = 0.5;
-    data[x-1].y = 1+2*x+3*x*x + data[x-1].sigma*gausrnd();
-  }
-}
-
 double poly(double* alpha, int M, double x)
 {
   double res = 0;
@@ -62,32 +45,22 @@ int numlines(FILE* df)
 	char c;
 	int N=0;
 	for(c=getc(df); c != EOF; c = getc(df)) if(c== '\n') N+=1;
+	rewind(df);
 
 	return(N);
 }
 
-
-int main(int argc, char** argv)
+void data_from_file(FILE *df, dpoint *data, int N)
 {
-	
-	int N;
-	FILE *df;
-	df = fopen(argv[1], "r");
-
-	N=numlines(df);
-	printf("%i\n", N);
-	rewind(df);
-
-	dpoint *data = (dpoint*)malloc(N*sizeof(dpoint));
-
 	double x, y, sigma;
 	for(int i = 0; fscanf(df, "%lf %lf %lf", &x, &y, &sigma)!=EOF; i++)
 	{
 		data[i].x=x, data[i].y=y, data[i].sigma=sigma;
 	}
-	fclose(df);
+}
 
-	int M = 2;
+void chi_fit(int M, dpoint *data, int N)
+{
 	double* a = (double*)malloc((M+1)*(M+1)*sizeof(double));
 	double* b = (double*)malloc((M+1)*sizeof(double));
 	double* alpha = (double*)malloc((M+1)*sizeof(double));
@@ -101,7 +74,23 @@ int main(int argc, char** argv)
 	free(a);
 	free(b);
 	free(alpha);
-	free(data);
+}
+
+int main(int argc, char** argv)
+{
+	int M = atoi(argv[2]);
+	FILE *df;
+
+	df = fopen(argv[1], "r"); // Opens file given as argument in a read only mode
+	int N=numlines(df);       // Gets the number of lines in a file and returns the point to the top of the file
+
+	dpoint *data = (dpoint*)malloc(N*sizeof(dpoint)); // creates a data structure of the proper size
+
+	data_from_file(df, data, N); // Transfers line by line values from df to data.
+	chi_fit(M, data, N);         // Fits the function using the fuctions developed by Alexandru
+
+	fclose(df);                  // Properly closes out the file
+	free(data);                  // Releases the memory used for data
 
 	return 0;
 }
