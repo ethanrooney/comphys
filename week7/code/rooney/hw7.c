@@ -22,10 +22,8 @@
 #include	<time.h>
 typedef struct { double x, y, sigma; } dpoint;
 
-void file_head(FILE *df, int* array_len, int* num_array)
-{
-	fscanf(df, "%i %i", num_array, array_len);
-}
+typedef struct { double a, b, c, xsqr; } four_point;
+
 
 void file_data(FILE *df, dpoint* data, double* sum_y, double* sum_ysqr, int array_len, int num_array)
 {
@@ -88,7 +86,7 @@ double chisq(double* alpha, int M, dpoint* data, int N)
   return res;
 }
 
-void chi_fit(int M, dpoint *data, int N)
+void chi_fit(int M, dpoint *data, int N, int j, four_point* poly_fits)
 {
 	double* a = (double*)malloc((M+1)*(M+1)*sizeof(double));
 	double* b = (double*)malloc((M+1)*sizeof(double));
@@ -96,42 +94,71 @@ void chi_fit(int M, dpoint *data, int N)
 
     computeab(data, N, a, M, b);
     solve_linsys(a, M+1, b, alpha);
-	for(int i = 0; i<=M; i++) printf("%lf\t", alpha[i]);
+	poly_fits[j].a=alpha[0];
+	poly_fits[j].b=alpha[1];
+	poly_fits[j].c=alpha[2];
+	poly_fits[j].xsqr=chisq(alpha, M, data, N);
 
-    printf("%lf\t", chisq(alpha, M, data, N));
-    printf("\n");
+    //printf("%lf\t%lf\t%lf\t%lf\n", poly_fits[j].a, poly_fits[j].b, poly_fits[j].c, poly_fits[j].xsqr );
 
 	free(a);
 	free(b);
 	free(alpha);
 }
 
+void get_stats(four_point* y, int N)
+{
+	double sum_a=0, sumsq_a=0;
+	double sum_b=0, sumsq_b=0;
+	double sum_c=0, sumsq_c=0;
+	double sum_xsqr=0, sumsq_xsqr=0;
+	double av_a, std_a;
+	double av_b, std_b;
+	double av_c, std_c;
+	double av_xsqr, std_xsqr;
+	for(int i=0; i<N; i++)
+	{
+		sum_a += y[i].a; sumsq_a += y[i].a*y[i].a;
+		sum_b += y[i].b; sumsq_b += y[i].b*y[i].b;
+		sum_c += y[i].c; sumsq_c += y[i].c*y[i].c;
+		sum_xsqr += y[i].xsqr; sumsq_xsqr += y[i].xsqr*y[i].xsqr;
+	}
+	av_a = sum_a/N; sumsq_a /= N; std_a = sqrt(sumsq_a - (av_a)*(av_a)); printf("%lf\t%lf\t", av_a, std_a);
+	av_b = sum_b/N; sumsq_b /= N; std_b = sqrt(sumsq_b - (av_b)*(av_b)); printf("%lf\t%lf\t", av_b, std_b);
+	av_c = sum_c/N; sumsq_c /= N; std_c = sqrt(sumsq_c - (av_c)*(av_c)); printf("%lf\t%lf\t", av_c, std_c);
+	av_xsqr = sum_xsqr/N; sumsq_xsqr /= N; std_xsqr = sqrt(sumsq_xsqr - (av_xsqr)*(av_xsqr)); printf("%lf\t%lf\n", av_xsqr, std_xsqr);
+}
+
 int main(int argc, char** argv)
 {
-	FILE* df = fopen(argv[1], "r");
-	int array_len;
-	int num_array;
-	file_head(df, &array_len, &num_array);
+	FILE* df = fopen(argv[1], "r");// Opens file given by the first argument
+	int array_len;//The Number of data points taken by each student
+	int num_array;//The number of student data sets taken
+	int N = atoi(argv[2]);
+
+	fscanf(df, "%i %i", &num_array, &array_len);// The First line of the file gives the number of students and the number of data points each student provided.
 	
-	dpoint* exp_data=(dpoint*)malloc(array_len*num_array*sizeof(dpoint));
-	dpoint* bs_data =(dpoint*)malloc(array_len*sizeof(dpoint));
-	double* sum_y = (double*)malloc(array_len*sizeof(double));
-	double* sum_ysqr = (double*)malloc(array_len*sizeof(double));
+	dpoint* exp_data=(dpoint*)malloc(array_len*num_array*sizeof(dpoint));//Will use this to store the data provided experimentally
+	dpoint* bs_data =(dpoint*)malloc(array_len*sizeof(dpoint));// Will use this to store the bootstrap of the data sample
+	double* sum_y = (double*)malloc(array_len*sizeof(double));// Used for calculating the Sigma
+	double* sum_ysqr = (double*)malloc(array_len*sizeof(double));// ^^
 
 
 	file_data(df, exp_data, sum_y, sum_ysqr, array_len, num_array);
 	
+	four_point* poly_fits = (four_point*)malloc(N*sizeof(four_point));
 
-	for(int i=0; i<=atoi(argv[2]); i++) 
+	for(int j=0; j<N; j++) 
 	{
 		boot_array(bs_data, exp_data, array_len, num_array, sum_y, sum_ysqr);
-		chi_fit(2, bs_data, array_len);
+		chi_fit(2, bs_data, array_len, j, poly_fits);
 	}
-	
-	
+	get_stats(poly_fits, N);
 
-
-
+	free(sum_ysqr);
+	free(sum_y);
+	free(bs_data);
+	free(exp_data);
 	fclose(df);
 	return 0;
 }
