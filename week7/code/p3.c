@@ -94,7 +94,7 @@ void chi_fit(int M, dpoint *data, int N, int j, four_point* poly_fits)
 	poly_fits[j].c=alpha[2];
 	poly_fits[j].xsqr=chisq(alpha, M, data, N);
 
-    printf("%lf\t%lf\t%lf\t%lf\n", poly_fits[j].a, poly_fits[j].b, poly_fits[j].c, poly_fits[j].xsqr );
+    printf("%lf\n", poly_fits[j].c);
 
 	free(a);
 	free(b);
