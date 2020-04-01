@@ -99,7 +99,7 @@ void chi_fit(int M, dpoint *data, int N, int j, four_point* poly_fits)
 	poly_fits[j].c=alpha[2];
 	poly_fits[j].xsqr=chisq(alpha, M, data, N);
 
-    printf("%20.15lf\n", -2*poly_fits[j].c );
+    //printf("%lf\t%lf\t%lf\t%lf\n", poly_fits[j].a, poly_fits[j].b, poly_fits[j].c, poly_fits[j].xsqr );
 
 	free(a);
 	free(b);
@@ -153,6 +153,7 @@ int main(int argc, char** argv)
 		boot_array(bs_data, exp_data, array_len, num_array, sum_y, sum_ysqr);
 		chi_fit(2, bs_data, array_len, j, poly_fits);
 	}
+	get_stats(poly_fits, N);
 
 	free(sum_ysqr);
 	free(sum_y);
