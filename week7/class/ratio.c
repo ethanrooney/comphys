@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 	{
 		double x = x0 + sigmax*gaussrnd();
 		double y = y0 + sigmay*gaussrnd();
-		printf("%.20lf\n", x/y);
+		printf("%.20lf\n", log(x*x+y*y));
 	}
 
 
