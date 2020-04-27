@@ -1,0 +1,11 @@
+To compile code use:
+
+gcc gas.c -o gas -lm
+
+To run code use:
+
+./gas 10 10 4 1 1 100 10 
+
+Where the syntax is:
+
+./gas <number of particles> <length of box> <temperature> <space offset> <velocity offset> <number of updates> <numbers of steps to skip>

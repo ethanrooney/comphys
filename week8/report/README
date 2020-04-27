@@ -1,0 +1,7 @@
+To compile:
+
+gcc nbody8.c -o nbody8
+
+to run
+
+./nbody <number of particles> <size of box> <Energy per particle> <dt> <total time> <Number of steps to skip> 
