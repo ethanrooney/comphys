@@ -3,8 +3,8 @@
 #include <math.h>
 #include <unistd.h>
 
-#define LENGTH 30.0
-#define RADIUS 10.0
+#define LENGTH 30.0 //Sets the lenght of one side of a square in cm
+#define RADIUS 10.0 //Set the radious of the hole in the middle of the plate
 
 typedef struct
 {
