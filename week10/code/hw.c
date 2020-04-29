@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <unistd.h> //needed for 
 
 #define LENGTH 30.0 //Sets the lenght of one side of a square in cm
 #define RADIUS 10.0 //Set the radious of the hole in the middle of the plate
@@ -104,8 +104,7 @@ int main(int argc, char** argv)
   iter = gauss_seidel(nphi, phi+2, ne, delta);
 
   for(int i=0; i<nphi; ++i)
-    printf("temp: % +10e  % +10e  % +20e\n", pos[2*i+0], pos[2*i+1],
-      phi[2+i]);
+    printf("temp: % +10e  % +10e  % +20e\n", pos[2*i+0], pos[2*i+1],phi[2+i]);
 
   double a =  LENGTH /(N-1);
   double small_sum=0;
@@ -115,18 +114,18 @@ int main(int argc, char** argv)
     double ex = -(phi[2+ne[4*i+0]] - phi[2+ne[4*i+1]])/(2*a);
     double ey = -(phi[2+ne[4*i+2]] - phi[2+ne[4*i+3]])/(2*a);
     printf("grad: %+10e %+10e  %20e %20e\n", pos[2*i+0], pos[2*i+1],ex, ey);
-	if(fabs(pos[2*i+0])< (RADIUS+LENGTH/2*N) && fabs(pos[2*i+0]) > (RADIUS-LENGTH/2*N)) small_sum += ex*a;
-	if(fabs(pos[2*i+1])< (RADIUS+LENGTH/2*N) && fabs(pos[2*i+0]) > (RADIUS-LENGTH/2*N)) small_sum += ey*a;
-	if(fabs(pos[2*i+0])< (LENGTH+LENGTH/2*N) && fabs(pos[2*i+0]) > (LENGTH-LENGTH/2*N)) large_sum += ex*a;
-	if(fabs(pos[2*i+1])< (LENGTH+LENGTH/2*N) && fabs(pos[2*i+0]) > (LENGTH-LENGTH/2*N)) large_sum += ey*a;
+	if(fabs(pos[2*i+0])< RADIUS+a/2 && fabs(pos[2*i+0]) > RADIUS-a/2 && fabs(pos[2*i+1])< RADIUS+a/2) small_sum += fabs(ey*a);
+	if(fabs(pos[2*i+0])< RADIUS+a/2 && fabs(pos[2*i+1]) < RADIUS+a/2 && fabs(pos[2*i+0])> RADIUS-a/2) small_sum += fabs(ex*a);
+	if(fabs(pos[2*i+0])< LENGTH+a/2 && fabs(pos[2*i+0]) > LENGTH-a/2 && fabs(pos[2*i+1])< LENGTH+a/2) large_sum += fabs(ey*a);
+	if(fabs(pos[2*i+0])< LENGTH+a/2 && fabs(pos[2*i+1])< LENGTH+a/2 && fabs(pos[2*i+0]) > LENGTH-a/2) large_sum += fabs(ex*a);
   }
 
   if(!isatty(fileno(stdout))) //checks to see if output is redirected, and prints out the number iterations made before sufficently relaxed.
   {
-    fprintf(stderr, "Iterations to relaxation time: %i\nHeatloss Small Square: %10e\nHeatloss Lerge Square: %10e\n",iter,small_sum,large_sum);
+    fprintf(stderr, "Iterations to relaxation time: %i\nHeatloss Small Square: %10e\nHeatloss Large Square: %10e\n",iter,small_sum,large_sum);
   }
   else
-    printf("Iterations to relaxation time: %i\nHeatloss Small Square: %10e\nHeatloss Lerge Square: %10e\n",iter,small_sum,large_sum);
+    printf("Iterations to relaxation time: %i\nHeatloss Small Square: %10e\nHeatloss Large Square: %10e\n",iter,small_sum,large_sum);
 
 
   free(ne);
