@@ -1,0 +1,7 @@
+to make:
+
+gcc hw.c -o hw -lm
+
+to run:
+
+./hw 90 1e-10

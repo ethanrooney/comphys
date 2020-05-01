@@ -90,9 +90,10 @@ int main(int argc, char** argv)
   int nphi;
   setup(N, &nphi, ne, pos);
 
-  //printf("nphi: %d\n", nphi);
-  for(int i=0; i<nphi; ++i); 
-    //printf("ne[%d]: %d %d %d %d\n", i, ne[4*i+0], ne[4*i+1], ne[4*i+2], ne[4*i+3]);
+  printf("nphi: %d\n", nphi);
+  for(int i=0; i<nphi; ++i) 
+    printf("ne[%d]: %d %d %d %d\n", i, ne[4*i+0], ne[4*i+1], 
+      ne[4*i+2], ne[4*i+3]);
 
   double* phi = malloc((nphi+2)*sizeof(double));
   phi[0] = 500;
@@ -101,8 +102,8 @@ int main(int argc, char** argv)
 
   iter = gauss_seidel(nphi, phi+2, ne, delta);
 
-  for(int i=0; i<nphi; ++i);
-    //printf("temp: % +10e  % +10e  % +20e\n", pos[2*i+0], pos[2*i+1],phi[2+i]);
+  for(int i=0; i<nphi; ++i)
+    printf("temp: % +10e  % +10e  % +20e\n", pos[2*i+0], pos[2*i+1],phi[2+i]);
 
   double a =  LENGTH /(N-1);
   double small_sum=0;
@@ -111,34 +112,28 @@ int main(int argc, char** argv)
   {
     double ex = -(phi[2+ne[4*i+0]] - phi[2+ne[4*i+1]])/(2*a);
     double ey = -(phi[2+ne[4*i+2]] - phi[2+ne[4*i+3]])/(2*a);
-    //printf("grad: %+10e %+10e  %20e %20e\n", pos[2*i+0], pos[2*i+1],ex, ey);
-  } 
+    printf("grad: %+10e %+10e  %20e %20e\n", pos[2*i+0], pos[2*i+1],ex, ey);
+  }
 
   double maxx=0, minx=30;
   int imax , imin;
-  for(int i=0; i<nphi; ++i) if(pos[2*i+0] == pos[2*i+1])
+  for(int i=0; i<nphi; ++i) if(pos[2*i+0]== pos[2*i+1])
   {
 	  double x = pos [2*i+0];
 	  if(x>maxx) { maxx=x; imax = i; }
 	  if(x>0 && x<minx) { minx=x; imin = i; }
-	  printf("x: %lf, minx: %lf, maxx: %lf\n", x, minx, maxx);
   }
-  printf("xvalue found\n");
   double  fmax =0.0,  fmin =0.0;
   for(int i=imax; pos[2*i+0] > -maxx+a/2; i = ne[4*i+1])
   {
 	  double  ey =  -(phi[2+ne[4*i+2]]-phi[2+ne[4*i+3]]) /(2*a);
 	  fmax += a*ey;
-	  printf("fmax: %lf\n",fmax);
   }
-  printf("fmax found: %lf\n",fmax);
   for(int i=imin; pos[2*i+0] > -minx+a/2; i = ne[4*i+1])
   {
 	  double  ey =  -(phi[2+ne[4*i+2]]-phi[2+ne[4*i+3]]) /(2*a);
 	  fmin += a*ey;
-	  printf("fmin: %lf\n",fmin);
   }
-  printf("fmin found: %lf\n",fmin);
   fmin *= 4; fmax *= 4;
   
   fprintf(stderr,"flux(min ,max): %e %e\n", fmin , fmax);
